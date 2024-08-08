@@ -19,11 +19,15 @@ import kmpcourseexpenses.composeapp.generated.resources.compose_multiplatform
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
+    val colors = getColorsTheme()
+    AppTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
+                Text("Click me!", color = colors.textColor)
+            }
+            Button(onClick = { showContent = !showContent }) {
+                Text("Click me!", color = colors.textColor)
             }
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
