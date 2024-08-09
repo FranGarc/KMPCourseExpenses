@@ -7,5 +7,7 @@
     <string name="category_car">Car</string>
     <string name="category_house">House</string>
     <string name="category_others">Others</string>
+    <string name="all_expenses">All Expenses</string>
+    <string name="view_all">View All</string>
 
 </resources>

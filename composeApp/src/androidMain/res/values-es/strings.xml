@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KMPCourseExpenses</string>
+    <string name="category_groceries">Alimentación</string>
+    <string name="category_party">Ocio</string>
+    <string name="category_snacks">Restaurantes</string>
+    <string name="category_coffee">Cafeterías</string>
+    <string name="category_car">Coche</string>
+    <string name="category_house">Hogar</string>
+    <string name="category_others">Otros</string>
+</resources>

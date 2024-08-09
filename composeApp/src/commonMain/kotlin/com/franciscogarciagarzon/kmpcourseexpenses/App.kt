@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.franciscogarciagarzon.kmpcourseexpenses.ui.ExpensesScreen
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -23,12 +24,7 @@ fun App() {
     AppTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!", color = colors.textColor)
-            }
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!", color = colors.textColor)
-            }
+            ExpensesScreen {  }
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {

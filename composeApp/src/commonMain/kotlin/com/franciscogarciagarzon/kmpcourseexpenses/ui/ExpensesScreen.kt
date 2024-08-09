@@ -18,7 +18,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
-import androidx.compose.material.Colors
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,17 +26,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.franciscogarciagarzon.kmpcourseexpenses.data.ExpenseManager
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.Expense
 import com.franciscogarciagarzon.kmpcourseexpenses.getColorsTheme
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import com.franciscogarciagarzon.kmpcourseexpenses.utils.currencyCode
+import com.franciscogarciagarzon.kmpcourseexpenses.utils.currencySymbol
+import kmpcourseexpenses.composeapp.generated.resources.Res
+import kmpcourseexpenses.composeapp.generated.resources.all_expenses
+import kmpcourseexpenses.composeapp.generated.resources.view_all
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ExpensesScreen(){
+fun ExpensesScreen(onExpenseClick: (expense: Expense) -> Unit){
     val colors = getColorsTheme()
 
     LazyColumn(
@@ -51,7 +55,8 @@ fun ExpensesScreen(){
             }
         }
 
-        items(emptyList<String>()){
+        items(ExpenseManager.fakeExpenseList){expense ->
+            ExpenseItem(expense, onExpenseClick)
 
         }
     }
@@ -69,13 +74,13 @@ fun ExpensesTotalHeader(total: Double){
                 .padding(16.dp),
             contentAlignment = Alignment.CenterStart
         ){
-            Text( text = "$$total",
+            Text( text = "$currencySymbol$total",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White
             )
             Text(
-                modifier = Modifier.align(Alignment.CenterEnd), text = "USD", color = Color.Gray
+                modifier = Modifier.align(Alignment.CenterEnd), text = currencyCode, color = Color.Gray
             )
         }
     }
@@ -90,7 +95,7 @@ fun AllExpensesHeader(){
         ){
             Text(
                 modifier = Modifier.weight(1f),
-                text= "All Expenses",
+                text= stringResource(Res.string.all_expenses),
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 20.sp,
                 color = colors.textColor
@@ -101,7 +106,7 @@ fun AllExpensesHeader(){
                       },
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
         ){
-            Text(text= "View All")
+            Text(text= stringResource(Res.string.view_all))
         }
     }
 }
@@ -144,7 +149,8 @@ fun ExpenseItem(
                 .weight(1f)
             ) {
                 Text(
-                    text = expense.category.name,
+                    text = stringResource(expense.category.label),
+//                    text = expense.category.name,
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = 18.sp,
                     color = colors.textColor
@@ -157,7 +163,7 @@ fun ExpenseItem(
                 )
             }
             Text(
-                text = "$${expense.amount}",
+                text = "$currencySymbol${expense.amount}",
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 color = Color.Gray
