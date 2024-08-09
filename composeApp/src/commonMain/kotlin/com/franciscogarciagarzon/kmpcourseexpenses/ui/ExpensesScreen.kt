@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import com.franciscogarciagarzon.kmpcourseexpenses.data.ExpenseManager
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.Expense
 import com.franciscogarciagarzon.kmpcourseexpenses.getColorsTheme
+import com.franciscogarciagarzon.kmpcourseexpenses.presentation.ExpenseUiState
 import com.franciscogarciagarzon.kmpcourseexpenses.utils.currencyCode
 import com.franciscogarciagarzon.kmpcourseexpenses.utils.currencySymbol
 import kmpcourseexpenses.composeapp.generated.resources.Res
@@ -41,7 +42,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ExpensesScreen(onExpenseClick: (expense: Expense) -> Unit){
+fun ExpensesScreen(
+    uiState: ExpenseUiState,
+    onExpenseClick: (expense: Expense) -> Unit){
     val colors = getColorsTheme()
 
     LazyColumn(
@@ -50,12 +53,12 @@ fun ExpensesScreen(onExpenseClick: (expense: Expense) -> Unit){
     ) {
         stickyHeader {
             Column(modifier = Modifier.background(color = colors.backgroundColor)) {
-                ExpensesTotalHeader(12354.34)
+                ExpensesTotalHeader(uiState.total)
                 AllExpensesHeader()
             }
         }
 
-        items(ExpenseManager.fakeExpenseList){expense ->
+        items(uiState.expenseList){expense ->
             ExpenseItem(expense, onExpenseClick)
 
         }

@@ -5,6 +5,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.franciscogarciagarzon.kmpcourseexpenses.data.ExpenseManager
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.Expense
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.ExpenseCategory
+import com.franciscogarciagarzon.kmpcourseexpenses.presentation.ExpenseUiState
 import com.franciscogarciagarzon.kmpcourseexpenses.ui.ExpenseItem
 import com.franciscogarciagarzon.kmpcourseexpenses.ui.ExpensesScreen
 
@@ -12,7 +13,12 @@ import com.franciscogarciagarzon.kmpcourseexpenses.ui.ExpensesScreen
 @Preview(showBackground = true)
 @Composable
 fun ExpensesScreenPreview(){
-    ExpensesScreen({})
+    ExpensesScreen(
+        ExpenseUiState(
+            ExpenseManager.fakeExpenseList,
+            ExpenseManager.fakeExpenseList.sumOf { it.amount }
+        ),
+        {})
 }
 
 @Preview(showBackground = true)
