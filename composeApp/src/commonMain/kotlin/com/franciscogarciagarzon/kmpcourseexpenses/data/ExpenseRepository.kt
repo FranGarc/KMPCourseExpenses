@@ -3,9 +3,8 @@ package com.franciscogarciagarzon.kmpcourseexpenses.data
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.Expense
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.ExpenseCategory
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.ExpenseRepositoryContract
-import kotlin.math.exp
 
-class ExpenseRepository(private val expenseManager: ExpenseManager = ExpenseManager): ExpenseRepositoryContract {
+class ExpenseRepository(private val expenseManager: ExpenseManager ): ExpenseRepositoryContract {
 
     override fun getAllExpenses(): List<Expense> {
        return expenseManager.fakeExpenseList
