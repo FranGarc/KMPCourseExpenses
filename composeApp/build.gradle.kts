@@ -40,6 +40,7 @@ kotlin {
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
+            implementation(compose.animation)
             implementation(compose.material)
             implementation(compose.materialIconsExtended)
             implementation(compose.ui)
@@ -47,6 +48,10 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.precompose)
+            implementation(libs.precompose.viewmodel)
+            implementation(libs.precompose.molecule)
+            implementation(libs.precompose.koin)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
