@@ -3,8 +3,6 @@ package com.franciscogarciagarzon.kmpcourseexpenses.preview
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.franciscogarciagarzon.kmpcourseexpenses.data.ExpenseManager
-import com.franciscogarciagarzon.kmpcourseexpenses.domain.Expense
-import com.franciscogarciagarzon.kmpcourseexpenses.domain.ExpenseCategory
 import com.franciscogarciagarzon.kmpcourseexpenses.presentation.ExpenseUiState
 import com.franciscogarciagarzon.kmpcourseexpenses.ui.ExpenseItem
 import com.franciscogarciagarzon.kmpcourseexpenses.ui.ExpensesScreen
@@ -18,7 +16,9 @@ fun ExpensesScreenPreview(){
             ExpenseManager.fakeExpenseList,
             ExpenseManager.fakeExpenseList.sumOf { it.amount }
         ),
-        {})
+        onItemClick = {},
+        //onDelete = {},
+        )
 }
 
 @Preview(showBackground = true)
@@ -26,6 +26,7 @@ fun ExpensesScreenPreview(){
 fun ExpenseItemPreview(){
     ExpenseItem(
         expense = ExpenseManager.fakeExpenseList.first(),
-            onExpenseClick = {}
+            onItemClick = {},
+       // onDelete= {}
     )
 }

@@ -25,13 +25,14 @@ fun getColorsTheme(): AppPalette{
     val isDarkMode = false
 
     val CategoryColor = Color(0xFF6A66FF)
+    val ContrastColor = Color(0xFFFF6666)
     val ExpenseItemColor = if(isDarkMode) Color(0xFF090808) else Color(0xFFF1F1F1)
     val BackgroundColor = if(isDarkMode) Color (0xFF1E1C1C) else Color.White
     val TextColor = if(isDarkMode) Color.White else Color.Black
     val AddIconColor =  if(isDarkMode) CategoryColor else Color.Black
     val ArrowRoundColor = if(isDarkMode) CategoryColor else Color.Gray.copy(alpha = .2f)
     return AppPalette(CategoryColor,
-        ExpenseItemColor, BackgroundColor, TextColor, AddIconColor, ArrowRoundColor
+        ExpenseItemColor, BackgroundColor, TextColor, AddIconColor, ArrowRoundColor, ContrastColor
     )
 }
 
@@ -42,4 +43,5 @@ data class AppPalette(
     val textColor: Color,
     val addIconColor: Color,
     val arrowRoundColor: Color,
+    val contrastColor: Color,
 )

@@ -20,6 +20,8 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,7 +31,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.franciscogarciagarzon.kmpcourseexpenses.data.ExpenseManager
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.Expense
 import com.franciscogarciagarzon.kmpcourseexpenses.getColorsTheme
 import com.franciscogarciagarzon.kmpcourseexpenses.presentation.ExpenseUiState
@@ -39,12 +40,15 @@ import kmpcourseexpenses.composeapp.generated.resources.Res
 import kmpcourseexpenses.composeapp.generated.resources.all_expenses
 import kmpcourseexpenses.composeapp.generated.resources.view_all
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ExpensesScreen(
     uiState: ExpenseUiState,
-    onExpenseClick: (expense: Expense) -> Unit){
+    onItemClick: (expense: Expense) -> Unit,
+//    onDelete: (expense: Expense) -> Unit ={},
+    ){
     val colors = getColorsTheme()
 
     LazyColumn(
@@ -59,7 +63,9 @@ fun ExpensesScreen(
         }
 
         items(uiState.expenseList){expense ->
-            ExpenseItem(expense, onExpenseClick)
+            ExpenseItem(expense, onItemClick,
+//                onDelete,
+            )
 
         }
     }
@@ -113,18 +119,19 @@ fun AllExpensesHeader(){
         }
     }
 }
-
 @Composable
+@Preview
 fun ExpenseItem(
     expense: Expense,
-    onExpenseClick: (expense: Expense) -> Unit
+    onItemClick: (expense: Expense) -> Unit,
+//    onDelete: (expense: Expense) -> Unit,
 ){
     val colors = getColorsTheme()
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(2.dp)
-            .clickable { onExpenseClick(expense) },
+            .clickable { onItemClick(expense) },
         backgroundColor = colors.expenseItemColor,
         shape = RoundedCornerShape(30)
     ){
@@ -166,11 +173,28 @@ fun ExpenseItem(
                 )
             }
             Text(
+                modifier = Modifier.padding(horizontal = 8.dp),
                 text = "$currencySymbol${expense.amount}",
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 color = Color.Gray
             )
+
+            Surface(
+                modifier = Modifier.size(50.dp),
+                shape = RoundedCornerShape(35),
+                color = colors.contrastColor
+            ) {
+                Image(
+                    modifier = Modifier
+                        //  .onClick(onDeleteClick)
+                        .padding(10.dp),
+                    imageVector = Icons.Default.Delete ,
+                    colorFilter = ColorFilter.tint(Color.White),
+                    contentScale = ContentScale.Crop,
+                    contentDescription = "delete icon"
+                )
+            }
         }
     }
 }
