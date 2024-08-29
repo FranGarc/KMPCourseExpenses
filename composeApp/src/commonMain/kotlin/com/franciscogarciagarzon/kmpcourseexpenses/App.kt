@@ -80,7 +80,7 @@ fun App() {
                     if(!isEditOrAddExpense){
                         FloatingActionButton(
                             modifier = Modifier.padding(8.dp),
-                            onClick = { navigator.navigate("/addExpenses") },
+                            onClick = { navigator.navigate("/addExpense") },
                             shape = RoundedCornerShape(50),
                             backgroundColor = colors.addIconColor,
                             contentColor = Color.White
@@ -109,7 +109,7 @@ enum class TopBarIcons(val icon: ImageVector, val contentDescription: String){
 @Composable
 fun getTitleTopAppBar(navigator: Navigator): String{
     var titleTopBar = TitleTopBarTypes.DAHSBOARD
-    val isOnAddExpenses = navigator.currentEntry.collectAsState(null).value?.route?.route.equals("/addExpenses/{id}")
+    val isOnAddExpenses = navigator.currentEntry.collectAsState(null).value?.route?.route.equals("/addExpense/{id}?")
     if(isOnAddExpenses){
         titleTopBar = TitleTopBarTypes.ADD
     }

@@ -2,6 +2,7 @@ package com.franciscogarciagarzon.kmpcourseexpenses.presentation
 
 
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.Expense
+import com.franciscogarciagarzon.kmpcourseexpenses.domain.ExpenseCategory
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.ExpenseRepositoryContract
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -56,5 +57,9 @@ class ExpensesViewModel(private val repository: ExpenseRepositoryContract): View
         _uiState.update { state ->
             state.copy(expenseList =  allExpenses, total = allExpenses.sumOf { it.amount })
         }
+    }
+
+    fun getCategories(): List<ExpenseCategory>{
+        return repository.getCategories()
     }
 }

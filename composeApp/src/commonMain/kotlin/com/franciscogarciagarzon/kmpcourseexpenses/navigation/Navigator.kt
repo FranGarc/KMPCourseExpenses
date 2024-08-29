@@ -8,6 +8,7 @@ import com.franciscogarciagarzon.kmpcourseexpenses.data.ExpenseManager
 import com.franciscogarciagarzon.kmpcourseexpenses.data.ExpenseRepository
 import com.franciscogarciagarzon.kmpcourseexpenses.getColorsTheme
 import com.franciscogarciagarzon.kmpcourseexpenses.presentation.ExpensesViewModel
+import com.franciscogarciagarzon.kmpcourseexpenses.ui.ExpenseDetailScreen
 import com.franciscogarciagarzon.kmpcourseexpenses.ui.ExpensesScreen
 import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
 import moe.tlaster.precompose.navigation.NavHost
@@ -33,10 +34,18 @@ fun Navigation(navigator: Navigator){
                 navigator.navigate("/addExpense/${expense.id}")
             }
         }
-        scene(route = "/addExpense/{id}"){ backStatEntry ->
+        scene(route = "/addExpense/{id}?"){ backStatEntry ->
             val idFromPath = backStatEntry.path<Long>("id")
-            val isAddExpense = idFromPath?.let { id-> viewModel.getExpenseWithId(id) }
+            val expense = idFromPath?.let { id-> viewModel.getExpenseWithId(id) }
 
+            ExpenseDetailScreen(expenseToEdit = expense, categoryList = viewModel.getCategories()){ expense ->
+                if(expense == null){
+                    viewModel.addExpense(expense)
+                }else{
+                    viewModel.editExpense(expense)
+                }
+                navigator.popBackStack()
+            }
         }
 
     }
