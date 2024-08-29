@@ -36,10 +36,10 @@ fun Navigation(navigator: Navigator){
         }
         scene(route = "/addExpense/{id}?"){ backStatEntry ->
             val idFromPath = backStatEntry.path<Long>("id")
-            val expense = idFromPath?.let { id-> viewModel.getExpenseWithId(id) }
+            val expenseFromEdit = idFromPath?.let { id-> viewModel.getExpenseWithId(id) }
 
-            ExpenseDetailScreen(expenseToEdit = expense, categoryList = viewModel.getCategories()){ expense ->
-                if(expense == null){
+            ExpenseDetailScreen(expenseToEdit = expenseFromEdit, categoryList = viewModel.getCategories()){ expense ->
+                if(expenseFromEdit == null){
                     viewModel.addExpense(expense)
                 }else{
                     viewModel.editExpense(expense)

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.franciscogarciagarzon.kmpcourseexpenses.data.ExpenseManager
 import com.franciscogarciagarzon.kmpcourseexpenses.presentation.ExpenseUiState
+import com.franciscogarciagarzon.kmpcourseexpenses.ui.ExpenseDetailScreen
 import com.franciscogarciagarzon.kmpcourseexpenses.ui.ExpenseItem
 import com.franciscogarciagarzon.kmpcourseexpenses.ui.ExpensesScreen
 
@@ -28,5 +29,17 @@ fun ExpenseItemPreview(){
         expense = ExpenseManager.fakeExpenseList.first(),
             onItemClick = {},
        // onDelete= {}
+    )
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun ExpenseDetailScreenPreview(){
+    ExpenseDetailScreen(
+        expenseToEdit = ExpenseManager.fakeExpenseList.first(),
+        categoryList = emptyList(),
+        addExpenseAndNavigateBack = {}
+        // onDelete= {}
     )
 }
