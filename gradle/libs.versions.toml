@@ -16,6 +16,7 @@ junit = "4.13.2"
 kotlin = "2.0.0"
 kotlinx-coroutines = "1.8.1"
 precompose_version ="1.6.1"
+koin = "3.5.1"
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -34,7 +35,11 @@ precompose = {group = "moe.tlaster", name ="precompose", version.ref ="precompos
 precompose-molecule = {group = "moe.tlaster", name ="precompose-molecule", version.ref ="precompose_version"}
 precompose-viewmodel = {group = "moe.tlaster", name ="precompose-viewmodel", version.ref ="precompose_version"}
 precompose-koin = {group = "moe.tlaster", name ="precompose-koin", version.ref ="precompose_version"}
-
+koin-core = {group = "io.insert-koin", name ="koin-core"}
+koin-compose = {group = "io.insert-koin", name ="koin-compose"}
+koin-bom = {group = "io.insert-koin", name ="koin-bom", version.ref ="koin"}
+koin-android = {group = "io.insert-koin", name ="koin-android"}
+koin-test = {group = "io.insert-koin", name ="koin-test"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

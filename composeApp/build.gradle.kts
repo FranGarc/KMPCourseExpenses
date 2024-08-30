@@ -36,6 +36,9 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.core)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -51,7 +54,13 @@ kotlin {
             implementation(libs.precompose)
             implementation(libs.precompose.viewmodel)
             implementation(libs.precompose.molecule)
+
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(project.dependencies.platform(libs.koin.bom))
+
             implementation(libs.precompose.koin)
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -60,6 +69,8 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test.junit)
             implementation(libs.kotlin.test)
+            implementation(libs.koin.test)
+
         }
     }
 }
