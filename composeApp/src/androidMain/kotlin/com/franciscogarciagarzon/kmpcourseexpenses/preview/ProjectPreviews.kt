@@ -28,7 +28,7 @@ fun ExpenseItemPreview(){
     ExpenseItem(
         expense = ExpenseManager.fakeExpenseList.first(),
             onItemClick = {},
-       // onDelete= {}
+        onDelete= {}
     )
 }
 

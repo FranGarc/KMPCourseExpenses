@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
+import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -47,7 +48,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun ExpensesScreen(
     uiState: ExpenseUiState,
     onItemClick: (expense: Expense) -> Unit,
-//    onDelete: (expense: Expense) -> Unit ={},
+    onDelete: (expense: Expense) -> Unit ={},
     ){
     val colors = getColorsTheme()
 
@@ -64,7 +65,7 @@ fun ExpensesScreen(
 
         items(uiState.expenseList){expense ->
             ExpenseItem(expense, onItemClick,
-//                onDelete,
+                onDelete,
             )
 
         }
@@ -119,12 +120,13 @@ fun AllExpensesHeader(){
         }
     }
 }
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 @Preview
 fun ExpenseItem(
     expense: Expense,
     onItemClick: (expense: Expense) -> Unit,
-//    onDelete: (expense: Expense) -> Unit,
+    onDelete: (expense: Expense) -> Unit,
 ){
     val colors = getColorsTheme()
     Card(
@@ -185,15 +187,22 @@ fun ExpenseItem(
                 shape = RoundedCornerShape(35),
                 color = colors.contrastColor
             ) {
-                Image(
+                IconButton(
                     modifier = Modifier
-                        //  .onClick(onDeleteClick)
                         .padding(10.dp),
-                    imageVector = Icons.Default.Delete ,
-                    colorFilter = ColorFilter.tint(Color.White),
-                    contentScale = ContentScale.Crop,
-                    contentDescription = "delete icon"
-                )
+                    onClick = {
+                        onDelete(expense)
+                    }
+                ){
+                    Image(
+
+                        imageVector = Icons.Default.Delete ,
+                        colorFilter = ColorFilter.tint(Color.White),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = "delete icon"
+                    )
+                }
+
             }
         }
     }
