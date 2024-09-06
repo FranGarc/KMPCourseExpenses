@@ -7,6 +7,17 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+//    alias(libs.plugins.serialization)
+    alias(libs.plugins.sqldelight)
+
+}
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.franciscogarciagarzon.kmpcourseexpenses.db")
+        }
+    }
 }
 
 kotlin {
@@ -39,6 +50,8 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
             implementation(libs.koin.android)
+
+            api(libs.sqldelight.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -61,10 +74,14 @@ kotlin {
 
             implementation(libs.precompose.koin)
 
+            api(libs.kmlogging)
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+            api(libs.sqldelight.desktop)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test.junit)

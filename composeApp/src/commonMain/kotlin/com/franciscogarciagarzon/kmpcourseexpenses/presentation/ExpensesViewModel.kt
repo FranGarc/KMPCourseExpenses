@@ -4,6 +4,7 @@ package com.franciscogarciagarzon.kmpcourseexpenses.presentation
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.Expense
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.ExpenseCategory
 import com.franciscogarciagarzon.kmpcourseexpenses.domain.ExpenseRepositoryContract
+import com.franciscogarciagarzon.kmpcourseexpenses.utils.KMMLogger
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -19,28 +20,36 @@ data class ExpenseUiState(
 class ExpensesViewModel(private val repository: ExpenseRepositoryContract): ViewModel() {
     private val _uiState = MutableStateFlow(ExpenseUiState())
     val uiState = _uiState.asStateFlow()
-    private val allExpenses = repository.getAllExpenses()
+    private var allExpenses: MutableList<Expense> = mutableListOf()
 
     init {
         getAllExpenses()
     }
+
+    private fun updateExpensesList(){
+        viewModelScope.launch {
+            allExpenses = repository.getAllExpenses().toMutableList()
+            updateState()
+        }
+    }
     fun addExpense(expense: Expense){
         viewModelScope.launch {
             repository.addExpense(expense)
-            updateState()
+            updateExpensesList()
         }
     }
 
     fun editExpense(expense: Expense){
         viewModelScope.launch {
             repository.editExpense(expense)
-            updateState()
+            updateExpensesList()
         }
     }
     fun removeExpense(expense: Expense){
+        KMMLogger().d("removeExpense: ${expense}")
         viewModelScope.launch {
             repository.removeExpense(expense)
-            updateState()
+            updateExpensesList()
         }
     }
     fun getExpenseWithId(id: Long): Expense{
@@ -49,13 +58,18 @@ class ExpensesViewModel(private val repository: ExpenseRepositoryContract): View
 
     private fun getAllExpenses(){
         viewModelScope.launch{
-            updateState()
+            updateExpensesList()
         }
     }
 
     private fun updateState(){
         _uiState.update { state ->
-            state.copy(expenseList =  allExpenses, total = allExpenses.sumOf { it.amount })
+            val subtotal =  allExpenses.sumOf { it.amount }
+            val formattedSubtotal = String.format("%.2f", subtotal)
+            KMMLogger().d("subtotal: ${subtotal}")
+            KMMLogger().d("formattedSubtotal: ${formattedSubtotal}")
+
+            state.copy(expenseList =  allExpenses, total = formattedSubtotal.toDouble())
         }
     }
 

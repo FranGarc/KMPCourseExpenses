@@ -11,37 +11,37 @@ object ExpenseManager {
         Expense(
             id = currentId++,
             amount = 70.0,
-            category = ExpenseCategory.Car,
+            category = ExpenseCategory.CAR,
             description = "Gasolina"
         ),
         Expense(
             id = currentId++,
             amount = 30.50,
-            category = ExpenseCategory.Groceries,
+            category = ExpenseCategory.GROCERIES,
             description = "frescos"
         ),
         Expense(
             id = currentId++,
             amount = 2300.0,
-            category = ExpenseCategory.House,
+            category = ExpenseCategory.HOUSE,
             description = "muebles"
         ),
         Expense(
             id = currentId++,
             amount = 20.75,
-            category = ExpenseCategory.Party,
+            category = ExpenseCategory.PARTY,
             description = "fiesta"
         ),
         Expense(
             id = currentId++,
             amount = 7.50,
-            category = ExpenseCategory.Coffee,
+            category = ExpenseCategory.COFFEE,
             description = "desayuno"
         ),
         Expense(
             id = currentId++,
             amount = 17.50,
-            category = ExpenseCategory.Others,
+            category = ExpenseCategory.OTHER,
             description = "regalo"
         ),
     )
@@ -69,12 +69,13 @@ object ExpenseManager {
     }
     fun getCategories(): List<ExpenseCategory>{
         return listOf(
-            ExpenseCategory.Car,
-            ExpenseCategory.Others,
-            ExpenseCategory.Coffee,
-            ExpenseCategory.Party,
-            ExpenseCategory.House,
-            ExpenseCategory.Groceries,
+            ExpenseCategory.CAR,
+            ExpenseCategory.OTHER,
+            ExpenseCategory.COFFEE,
+            ExpenseCategory.PARTY,
+            ExpenseCategory.HOUSE,
+            ExpenseCategory.SNACKS,
+            ExpenseCategory.GROCERIES,
 
         )
     }

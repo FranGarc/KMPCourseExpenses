@@ -20,15 +20,25 @@ import kmpcourseexpenses.composeapp.generated.resources.category_snacks
 import org.jetbrains.compose.resources.StringResource
 
 enum class ExpenseCategory(val icon: ImageVector,  val label: StringResource){
-    Groceries(Icons.Default.FoodBank, Res.string.category_groceries),
-    Party(Icons.Default.PartyMode, Res.string.category_party),
-    Snacks(Icons.Default.Fastfood, Res.string.category_snacks),
-    Coffee(Icons.Default.Coffee, Res.string.category_coffee),
-    Car(Icons.Default.ElectricCar, Res.string.category_car),
-    House(Icons.Default.House, Res.string.category_house),
-    Others(Icons.Default.ViewCozy, Res.string.category_others)
+    GROCERIES(Icons.Default.FoodBank, Res.string.category_groceries),
+    PARTY(Icons.Default.PartyMode, Res.string.category_party),
+    SNACKS(Icons.Default.Fastfood, Res.string.category_snacks),
+    COFFEE(Icons.Default.Coffee, Res.string.category_coffee),
+    CAR(Icons.Default.ElectricCar, Res.string.category_car),
+    HOUSE(Icons.Default.House, Res.string.category_house),
+    OTHER(Icons.Default.ViewCozy, Res.string.category_others)
 }
 
+
+enum class ExpenseCategoryNames{
+    GROCERIES,
+    PARTY,
+    SNACKS,
+    COFFEE,
+    CAR,
+    HOUSE,
+    OTHER
+}
 data class Expense(
     val id: Long = -1,
     val amount: Double,
